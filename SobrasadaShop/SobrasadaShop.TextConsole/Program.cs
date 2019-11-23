@@ -7,21 +7,14 @@ namespace SobrasadaShop.TextConsole
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
-            float taxPercentage = -1f;
+            TaxAditionManager taxAditionManager = new TaxAditionManager();
+            var currentTax = taxAditionManager.AcquireTax();
+            
             var basket = new Basket();
-            Console.WriteLine("Insert iso code:[ESP, FR, DEU]");
-            var currentIso = Console.ReadLine();
-            if(!Sobrasada.AllowedIsos.Contains(currentIso))
-            {
-                Console.WriteLine("Invalid iso code add tax percentage");
-                
-                while (!float.TryParse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture, out taxPercentage))
-                {
-                    Console.WriteLine("Tax percentage must be a valid number");
-                }
-            }
+            
             var isEndOfSale = false;
 
             while (!isEndOfSale)
@@ -40,14 +33,14 @@ namespace SobrasadaShop.TextConsole
                 }
                 for (int i = 0; i < amount; i++)
                 {
-                    basket.AddToBaquest(new Sobrasada(currWeight, currentIso));
+                    basket.AddToBaquest(new Sobrasada(currWeight, currentTax));
                 }
                 Console.WriteLine("\nWould your like to add another item? [yes] [no]");
                 var answer = Console.ReadLine();
                 isEndOfSale = answer != "yes";
 
             }
-            Console.WriteLine(basket.PrintContent(currentIso, taxPercentage));
+            Console.WriteLine(basket.PrintContent());
         }
 
         
