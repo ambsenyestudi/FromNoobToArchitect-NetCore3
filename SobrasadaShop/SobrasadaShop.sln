@@ -5,11 +5,6 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SobrasadaShop.TextConsole", "SobrasadaShop.TextConsole\SobrasadaShop.TextConsole.csproj", "{965D85F2-960A-48CD-A806-FFE5C387BF68}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{75154A45-FEAB-4408-9839-8918A26D507C}"
-	ProjectSection(SolutionItems) = preProject
-		OldIterations.md = OldIterations.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
