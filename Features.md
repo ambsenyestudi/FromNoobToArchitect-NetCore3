@@ -1,10 +1,12 @@
 # Tax addition feature list
-> Iteration 0
->- As a user I want to get taxes added to my sobrasada base price
->- Sobrasada costs 6€
+> Iteration 1 
+>- Tax for: Spain, Germany and France
+>- Posibility to add taxes manually
+>- User can set number of sobrasadas per sale
+>- Each sobrasada priece must be printed before and after taxes
+>- Total price of sobrasadas must be added before and after texes
+>- Sobrasada costs 6€ per Kilogram
 ---
-At demo they say:
+Older iterations [here](./OldIterations)
 
 
--We wanted to be able to sell more than one sobrada
--Sobrasadas cost 6€/Kg
