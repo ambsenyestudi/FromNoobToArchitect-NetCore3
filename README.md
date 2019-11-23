@@ -8,5 +8,6 @@ Joan is fresh out of primary school, he took some programing clases there.
 aplication to add taxes to the sobrasadas that he sells.</p>
 
 ## Feateures
-To make it more real world like [here] (Features.md) is a list of 
-iterations and feature requests
+To make it more real world like [here](./Features.md) is a list of 
+iterations and feature requests.
+
