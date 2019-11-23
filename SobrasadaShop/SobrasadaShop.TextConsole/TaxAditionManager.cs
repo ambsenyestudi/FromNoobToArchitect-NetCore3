@@ -24,6 +24,7 @@ namespace SobrasadaShop.TextConsole
                 var isEmptyInput = string.IsNullOrWhiteSpace(currentIso);
                 if(isEmptyInput)
                 {
+                    Console.WriteLine("Insert custom tax: ");
                     return GetCustomTax();
                 }
                 else
@@ -38,6 +39,36 @@ namespace SobrasadaShop.TextConsole
             }
             return null;
 
+        }
+
+        internal int AcquireAmount()
+        {
+            Console.WriteLine("Insert amount of sobrasadas :");
+            int amount = -1;
+            bool isValidInput = false;
+            
+            while (!isValidInput)
+            {
+                var amountInput = Console.ReadLine();
+                isValidInput = int.TryParse(amountInput, out amount);
+                //Enter means 1
+                if (string.IsNullOrWhiteSpace(amountInput))
+                {
+                    return 1;
+                }
+                else if(!isValidInput)
+                {
+                    Console.WriteLine("Amount should be a valid number");
+                }
+            }
+            return amount;
+        }
+
+        public float AcquireWeight()
+        {
+            Console.WriteLine("Insert sobrasada weight:");
+            float currWeight = GetUserInputFloat("Weight must be a valid number");
+            return currWeight;
         }
 
         private Tax GetIsoTax(string iso)
@@ -60,10 +91,9 @@ namespace SobrasadaShop.TextConsole
         private float GetUserInputFloat(string errorMessage)
         {
             float result = -1f;
-            Console.WriteLine("Insert custom tax: ");
             while (!float.TryParse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture,out result))
             {
-                Console.WriteLine("Invalid task, try again");
+                Console.WriteLine(errorMessage);
             }
             return result;
         }

@@ -3,7 +3,7 @@
     public class Sobrasada
     {
         
-        private const float SOBRASADA_PRICE = 6.0f;
+        
         private readonly float weight;
         private readonly Tax tax;
 
@@ -12,7 +12,7 @@
             this.weight = kilos;
             this.tax = tax;
         }
-        public float BasePrice { get => SOBRASADA_PRICE * weight; }
+        public float BasePrice { get => SobrasadaConfiguration.PRICE_PER_KILOGRAM * weight; }
 
         public float FigurePrice()
         {
