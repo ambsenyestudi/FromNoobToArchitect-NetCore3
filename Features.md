@@ -1,11 +1,10 @@
 # Tax addition feature list
-> Iteration 1 
->- Tax for: Spain, Germany and France
->- Posibility to add taxes manually
->- User can set number of sobrasadas per sale
->- Each sobrasada priece must be printed before and after taxes
->- Total price of sobrasadas must be added before and after texes
->- Sobrasada costs 6€ per Kilogram
+> Iteration 2 
+>- Validate user input with tolerance
+>- Present country choice or insert your own tax
+>- Settable tax multiple input formats
+>- Configurable taxes
+>- Configurable sobrasada cost
 ---
 Older iterations [here](./OldIterations)
 
