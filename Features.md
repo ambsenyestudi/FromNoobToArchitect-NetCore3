@@ -1,10 +1,9 @@
 # Tax addition feature list
 > Iteration 2 
->- Validate user input with tolerance
->- Present country choice or insert your own tax
->- Settable tax multiple input formats
->- Configurable taxes
->- Configurable sobrasada cost
+>- We need to sell more items
+>- items must have configurable price
+>- basket must have ticket lines
+>- Web api for future projects
 ---
 Older iterations [here](./OldIterations.md)
 
