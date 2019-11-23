@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SobrasadaShop.Domain.Taxes;
 
 namespace SobrasadaShop.TextConsole
 {

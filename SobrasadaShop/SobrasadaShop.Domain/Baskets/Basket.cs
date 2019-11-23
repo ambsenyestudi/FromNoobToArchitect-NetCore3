@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SobrasadaShop.TextConsole
+namespace SobrasadaShop.Domain.Baskets
 {
     public class Basket
     {
-        private List<Sobrasada> items;
-        
+        private List<BasketItem> items;
+
         public Basket()
         {
-            this.items = new List<Sobrasada>();
+            this.items = new List<BasketItem>();
         }
-        public void AddToBaquest(Sobrasada sobrasada)
+        public void AddToBaquest(BasketItem item)
         {
-            items.Add(sobrasada);
+            items.Add(item);
         }
         public string PrintContent()
         {

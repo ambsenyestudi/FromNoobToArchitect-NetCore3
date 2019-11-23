@@ -1,8 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SobrasadaShop.Application\SobrasadaShop.Application.csproj" />
+    <ProjectReference Include="..\SobrasadaShop.Domain\SobrasadaShop.Domain.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SobrasadaShop.TextConsole
+﻿namespace SobrasadaShop.Domain.Taxes
 {
     public class Tax
     {
@@ -18,5 +14,4 @@ namespace SobrasadaShop.TextConsole
             return new Tax { Name = name, Amount = amount };
         }
     }
-    
 }
