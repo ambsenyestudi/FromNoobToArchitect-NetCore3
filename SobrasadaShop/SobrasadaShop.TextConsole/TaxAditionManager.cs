@@ -1,7 +1,8 @@
 ﻿using SobrasadaShop.Application.Amount;
+using SobrasadaShop.Application.DTO;
+using SobrasadaShop.Application.Taxes;
 using SobrasadaShop.Application.Weight;
-using SobrasadaShop.Domain.Baskets;
-using SobrasadaShop.Domain.Taxes;
+using SobrasadaShop.Application.Baskets;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -10,45 +11,49 @@ namespace SobrasadaShop.TextConsole
 {
     public class TaxAditionManager
     {
-        private readonly Basket basket;
-        private readonly TaxManager taxManager;
+        private readonly BasketService basketService;
+        private readonly TaxService taxService;
         private readonly AmountService amountService;
         private readonly WeightService weightService;
+        private readonly TaxStorage taxStorage;
 
         public TaxAditionManager()
         {
-            this.basket = new Basket();
-            this.taxManager = new TaxManager();
+            this.basketService = new BasketService();
+            this.taxService = new TaxService();
             this.amountService = new AmountService();
             this.weightService = new WeightService();
+            this.taxStorage = new TaxStorage();
         }
-        public Tax AcquireTax()
+        public TaxDTO AcquireTax()
         {
+            //Todo fix this message generation
             string isoOptionsMsg = string.Format("Insert iso code: {0} or press enter to insert custom tax",
-                taxManager.GetAllowedIsos());
+                taxStorage.Taxes.Select(tx=>taxService.Pritify(tx.IsoCode,"[{0}]")));
             Console.WriteLine(isoOptionsMsg);
-            bool isValidIso = false;
-            while (!isValidIso)
+            //ToDo
+            /*
+            var taxInput = RetryWhileInvalidInput(taxService.isValidTax, taxStorage.Taxes);
+            if(!string.IsNullOrWhiteSpace(taxInput))
             {
-                var currentIso = Console.ReadLine();
-                var isEmptyInput = string.IsNullOrWhiteSpace(currentIso);
-                if(isEmptyInput)
-                {
-                    Console.WriteLine("Insert custom tax: ");
-                    return GetCustomTax();
-                }
-                else
-                {
-                    var result = GetIsoTax(currentIso);
-                    if(result != null)
-                    {
-                        return result;
-                    }
-
-                }
+                taxStorage.FilterByIso(taxInput);
             }
-            return null;
+            else
+            {
+            */
+                return AcquierCutomTask();
+            //}
+            
 
+        }
+
+        private TaxDTO AcquierCutomTask()
+        {
+            Console.WriteLine("Insert custom tax value");
+            var input = RetryWhileInvalidInput(taxService.isValidTaxAmount);
+            var customTax = new TaxDTO { Name = "Custom", Amount = float.Parse(input) };
+            var id = taxStorage.Create(customTax);
+            return taxStorage.Read(id);
         }
 
         public int AcquireAmount()
@@ -65,23 +70,6 @@ namespace SobrasadaShop.TextConsole
             return weightService.ProcessWeight(weightInput);
         }
 
-        private Tax GetIsoTax(string iso)
-        {
-            var result = taxManager.Taxes.Where(tx => tx.IsoCode == iso.ToUpper());
-            return result.FirstOrDefault();
-        }
-
-        private Tax GetCustomTax()
-        {
-            float amount = GetUserInputFloat("Invalid tax, try again");
-            //Multiple formats 0.04 or 1.04f
-            if(amount<1f)
-            {
-                amount += 1;
-            }
-            return Tax.Create("Custom",amount);
-        }
-
         private float GetUserInputFloat(string errorMessage)
         {
             float result = -1f;
@@ -92,8 +80,9 @@ namespace SobrasadaShop.TextConsole
             return result;
         }
         public void Run()
+
         {
-            var currentTax = AcquireTax();
+            basketService.Tax = AcquireTax();
             var isEndOfSale = false;
             while(!isEndOfSale)
             {
@@ -102,13 +91,13 @@ namespace SobrasadaShop.TextConsole
                 int amount = AcquireAmount();
                 for (int i = 0; i < amount; i++)
                 {
-                    basket.AddToBaquest(new BasketItem("Sobrasada", SobrasadaConfiguration.PRICE_PER_KILOGRAM, currWeight, currentTax));
+                    basketService.Add(new ShopingItemDTO { Name = "Sobrasada", PricePerUnitOfMesure = SobrasadaConfiguration.PRICE_PER_KILOGRAM, Mesure = currWeight });
                 }
                 Console.WriteLine("\nWould your like to add another item? [yes] [no]");
                 var answer = Console.ReadLine();
                 isEndOfSale = answer.ToLower() != "yes";
             }
-            Console.WriteLine(basket.PrintContent());
+            Console.WriteLine(basketService.PrintSummary());
         }
         private string RetryWhileInvalidInput(Func<string, bool> validationAction)
         {

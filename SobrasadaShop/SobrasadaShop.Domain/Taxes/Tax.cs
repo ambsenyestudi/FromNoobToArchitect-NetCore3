@@ -1,4 +1,6 @@
-﻿namespace SobrasadaShop.Domain.Taxes
+﻿using System;
+
+namespace SobrasadaShop.Domain.Taxes
 {
     public class Tax
     {
@@ -9,6 +11,7 @@
         {
             return new Tax { Name = name, IsoCode = isoCode, Amount = amount };
         }
+
         public static Tax Create(string name, float amount)
         {
             return new Tax { Name = name, Amount = amount };

@@ -1,5 +1,6 @@
 ﻿using SobrasadaShop.Application.Rules;
 using System;
+using System.Globalization;
 
 namespace SobrasadaShop.Application.Weight
 {
@@ -14,7 +15,8 @@ namespace SobrasadaShop.Application.Weight
         {
             if(greaterThanZeroRule.IsValid(weight))
             {
-                return float.Parse(weight);
+                //Unify this
+                return float.Parse(weight, NumberStyles.Any, CultureInfo.InvariantCulture);
             }
             throw new ArgumentException(InvalidWeightMessage(weight));
         }
